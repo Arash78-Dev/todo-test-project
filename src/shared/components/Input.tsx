@@ -19,11 +19,11 @@ const Input = ({
 }: InputProps) => {
   return (
     <div
-      className={`flex gap-2 border border-gray-300 rounded-md p-2 w-full ${className}`}
+      className={`flex gap-1 border border-gray-300 rounded-md p-2 w-full ${className}`}
     >
       {leftIcon && leftIcon}
       <input
-        className="flex-1 outline-none"
+        className="flex-1  outline-none"
         value={value}
         onChange={(e) => {
           onChange?.(e);

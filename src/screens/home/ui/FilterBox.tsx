@@ -20,14 +20,14 @@ const FilterBox = ({
   isAdding,
 }: FilterBoxProps) => {
   return (
-    <div className="flex justify-between w-full gap-4">
+    <div className="flex flex-col lg:flex-row justify-between w-full gap-4">
       <DebounceInput
         onValueChange={(value) => setSearch(value)}
         value={search}
         placeholder="Search"
       />
 
-      <div className="flex gap-2">
+      <div className="flex justify-between gap-2">
         <Select
           className="border border-gray-300 rounded-md p-2"
           onChange={(e) =>
@@ -42,16 +42,14 @@ const FilterBox = ({
             { label: "Incomplete", value: "incomplete" },
           ]}
         />
-      </div>
 
-      <Button
-        onClick={onAddTodo}
-        className={`${
-          isAdding ? "bg-green-500 text-white" : ""
-        }`}
-      >
-        Add
-      </Button>
+        <Button
+          onClick={onAddTodo}
+          className={`${isAdding ? "bg-green-500 text-white" : ""}`}
+        >
+          Add
+        </Button>
+      </div>
     </div>
   );
 };

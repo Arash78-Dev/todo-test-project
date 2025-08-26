@@ -2,16 +2,15 @@ import { Todo } from "@/services/types";
 import TodoBox from "@/shared/widget/TodoBox";
 import { useAppDispatch } from "@/store";
 import { addTodos } from "@/store/todoSlice";
-import { Reorder, useMotionValue } from "framer-motion";
+import { Reorder } from "framer-motion";
 
 interface ShowTodoListProps {
   data: Todo[];
   isLoading?: boolean;
-  isUpdating?: boolean;
-  isDeleting?: boolean;
+  hasFilter?: boolean;
 }
 
-const ShowTodoList = ({ data, isLoading }: ShowTodoListProps) => {
+const ShowTodoList = ({ data, isLoading, hasFilter }: ShowTodoListProps) => {
   const dispatch = useAppDispatch();
 
   return isLoading ? (
@@ -23,14 +22,16 @@ const ShowTodoList = ({ data, isLoading }: ShowTodoListProps) => {
       onReorder={(newOrder) => dispatch(addTodos(newOrder))}
     >
       {data?.map((todo) => (
-        <Reorder.Item key={todo.id} value={todo}>
+        <Reorder.Item key={todo.id} value={todo} dragListener={!hasFilter}>
           <div className="mt-3">
-            <TodoBox
-              key={todo.id}
-              id={todo.id.toString()}
-              title={todo.todo}
-              isCompleted={todo.completed}
-            />
+            <div className="flex items-center gap-2">
+              <TodoBox
+                key={todo.id}
+                id={todo.id.toString()}
+                title={todo.todo}
+                isCompleted={todo.completed}
+              />
+            </div>
           </div>
         </Reorder.Item>
       ))}

@@ -33,7 +33,7 @@ export default function HomePage() {
 
   return (
     <div className="flex items-center justify-center h-screen">
-      <div className="flex flex-col gap-4 items-center justify-center h-screen w-[40%]">
+      <div className="flex flex-col gap-4 items-center justify-center h-screen lg:w-[40%] w-full px-6 py-12">
         <div className="text-2xl font-bold">To Do List</div>
 
         <FilterBox
@@ -45,21 +45,25 @@ export default function HomePage() {
           onAddTodo={() => setIsAdding((prev) => !prev)}
         />
 
-        <div className="h-[80%] overflow-hidden flex flex-col  w-full">
-          {/* <div
-            className={`${
-              isAdding ? "h-20 opacity-100" : "h-0 opacity-0"
-            } transition-all duration-400 ease`}
-          >
-            <AddTodoBox
-              onAddTodo={handleAddTodo}
-              onCancel={() => setIsAdding(false)}
-              onSuccess={() => setIsAdding(false)}
-            />
-          </div> */}
+        <div
+          className={`${
+            isAdding ? "h-20 opacity-100 visible" : "h-0 opacity-0 invisible"
+          } transition-all duration-400 ease`}
+        >
+          <AddTodoBox
+            onAddTodo={handleAddTodo}
+            onCancel={() => setIsAdding(false)}
+            onSuccess={() => setIsAdding(false)}
+          />
+        </div>
 
+        <div className="flex-1 overflow-hidden flex flex-col  w-full">
           <div className="overflow-y-auto h-full">
-            <ShowTodoList data={optimisticData ?? []} isLoading={isLoading} />
+            <ShowTodoList
+              data={optimisticData ?? []}
+              isLoading={isLoading}
+              hasFilter={search.length > 0 || completedFilter !== "all"}
+            />
           </div>
         </div>
       </div>
